@@ -1,7 +1,8 @@
-package dev.anmatolay.template.xml
+package dev.anmatolay.template.xml.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import dev.anmatolay.template.xml.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
