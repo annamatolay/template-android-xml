@@ -2,5 +2,5 @@ package dev.anmatolay.template.xml.presentation
 
 import dev.anmatolay.template.xml.core.presentation.BaseViewModel
 
-class MainViewModel : BaseViewModel() {
+class MainActivityViewModel : BaseViewModel() {
 }

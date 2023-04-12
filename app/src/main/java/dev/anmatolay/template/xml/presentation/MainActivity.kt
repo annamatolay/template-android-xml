@@ -5,7 +5,7 @@ import dev.anmatolay.template.xml.R
 import dev.anmatolay.template.xml.core.presentation.BaseActivity
 
 class MainActivity : BaseActivity() {
-    override val viewModel = MainViewModel()
+    override val viewModel = MainActivityViewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
