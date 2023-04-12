@@ -5,6 +5,7 @@ import androidx.annotation.CallSuper
 import androidx.appcompat.app.AppCompatActivity
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.disposables.Disposable
+import timber.log.Timber
 
 abstract class BaseActivity : AppCompatActivity() {
 
@@ -21,6 +22,7 @@ abstract class BaseActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         aliveDisposables = CompositeDisposable()
         viewModel.onViewCreated()
+        Timber.d("${this.javaClass.simpleName} - onCreate")
     }
 
     @CallSuper
@@ -28,6 +30,7 @@ abstract class BaseActivity : AppCompatActivity() {
         super.onResume()
         foregroundDisposables = CompositeDisposable()
         viewModel.onViewResumed()
+        Timber.d("${this.javaClass.simpleName} - onResume")
     }
 
     @CallSuper
@@ -35,6 +38,7 @@ abstract class BaseActivity : AppCompatActivity() {
         foregroundDisposables.clear()
         viewModel.onViewPaused()
         super.onPause()
+        Timber.d("${this.javaClass.simpleName} - onPause")
     }
 
     @CallSuper
@@ -42,5 +46,6 @@ abstract class BaseActivity : AppCompatActivity() {
         aliveDisposables.clear()
         viewModel.onDestroyView()
         super.onDestroy()
+        Timber.d("${this.javaClass.simpleName} - onDestroy")
     }
 }

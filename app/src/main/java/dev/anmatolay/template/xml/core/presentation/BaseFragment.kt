@@ -6,6 +6,7 @@ import androidx.annotation.CallSuper
 import androidx.fragment.app.Fragment
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.disposables.Disposable
+import timber.log.Timber
 
 abstract class BaseFragment : Fragment() {
 
@@ -22,6 +23,7 @@ abstract class BaseFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         aliveDisposables = CompositeDisposable()
         viewModel.onViewCreated()
+        Timber.d("${this.javaClass.simpleName} - onViewCreated")
     }
 
     @CallSuper
@@ -29,6 +31,7 @@ abstract class BaseFragment : Fragment() {
         super.onResume()
         foregroundDisposables = CompositeDisposable()
         viewModel.onViewResumed()
+        Timber.d("${this.javaClass.simpleName} - onResume")
     }
 
     @CallSuper
@@ -36,6 +39,7 @@ abstract class BaseFragment : Fragment() {
         foregroundDisposables.clear()
         viewModel.onViewPaused()
         super.onPause()
+        Timber.d("${this.javaClass.simpleName} - onPause")
     }
 
     @CallSuper
@@ -43,5 +47,6 @@ abstract class BaseFragment : Fragment() {
         aliveDisposables.clear()
         viewModel.onDestroyView()
         super.onDestroyView()
+        Timber.d("${this.javaClass.simpleName} - onDestroyView")
     }
 }

@@ -6,6 +6,7 @@ import dev.anmatolay.template.xml.core.NavigationEvent
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.disposables.Disposable
+import timber.log.Timber
 
 open class BaseViewModel {
 
@@ -27,20 +28,24 @@ open class BaseViewModel {
     @CallSuper
     open fun onViewCreated() {
         aliveDisposables = CompositeDisposable()
+        Timber.d("${this.javaClass.simpleName} - onViewCreated")
     }
 
     @CallSuper
     open fun onViewResumed() {
         foregroundDisposables = CompositeDisposable()
+        Timber.d("${this.javaClass.simpleName} - onViewResumed")
     }
 
     @CallSuper
     open fun onViewPaused() {
         foregroundDisposables.clear()
+        Timber.d("${this.javaClass.simpleName} - onViewPaused")
     }
 
     @CallSuper
     open fun onDestroyView() {
         aliveDisposables.clear()
+        Timber.d("${this.javaClass.simpleName} - onDestroyView")
     }
 }
