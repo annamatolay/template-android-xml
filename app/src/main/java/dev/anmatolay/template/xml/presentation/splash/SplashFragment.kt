@@ -9,9 +9,10 @@ import dev.anmatolay.template.xml.R
 import dev.anmatolay.template.xml.core.presentation.BaseFragment
 import dev.anmatolay.template.xml.util.navigateTo
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import org.koin.android.ext.android.inject
 
 class SplashFragment : BaseFragment() {
-    override val viewModel = SplashViewModel()
+    override val viewModel by inject<SplashViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
