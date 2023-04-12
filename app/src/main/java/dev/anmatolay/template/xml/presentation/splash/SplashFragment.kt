@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import dev.anmatolay.template.xml.R
 import dev.anmatolay.template.xml.core.presentation.BaseFragment
 import dev.anmatolay.template.xml.util.navigateTo
@@ -21,6 +22,8 @@ class SplashFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        getAppActionBar()?.hide()
+
         viewModel.navigationEvents
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { event ->
@@ -31,4 +34,11 @@ class SplashFragment : BaseFragment() {
             }
             .disposeOnPause()
     }
+
+    override fun onDetach() {
+        super.onDetach()
+        getAppActionBar()?.show()
+    }
+
+    private fun getAppActionBar() = (activity as? AppCompatActivity)?.supportActionBar
 }
