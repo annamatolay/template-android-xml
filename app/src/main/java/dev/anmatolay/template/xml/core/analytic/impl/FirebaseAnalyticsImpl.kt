@@ -1,9 +1,10 @@
-package dev.anmatolay.template.xml.core.analytic
+package dev.anmatolay.template.xml.core.analytic.impl
 
 import android.os.Bundle
 import com.google.firebase.analytics.FirebaseAnalytics
+import dev.anmatolay.template.xml.core.analytic.AnalyticsWrapper
 
-class FirebaseAnalyticsImpl(private val firebaseAnalytics: FirebaseAnalytics) : Analytics {
+class FirebaseAnalyticsImpl(private val firebaseAnalytics: FirebaseAnalytics) : AnalyticsWrapper {
 
     override fun setUserId(userId: String?) {
         firebaseAnalytics.setUserId(userId)

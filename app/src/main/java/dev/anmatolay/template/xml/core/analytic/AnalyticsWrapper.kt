@@ -2,7 +2,7 @@ package dev.anmatolay.template.xml.core.analytic
 
 import android.os.Bundle
 
-interface Analytics {
+interface AnalyticsWrapper {
 
   fun setUserId(userId: String?)
 
