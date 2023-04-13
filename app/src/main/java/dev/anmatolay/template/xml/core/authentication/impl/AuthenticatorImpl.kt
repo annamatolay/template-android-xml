@@ -1,31 +1,35 @@
 package dev.anmatolay.template.xml.core.authentication.impl
 
-import com.google.android.gms.tasks.Task
-import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
-import dev.anmatolay.template.xml.core.authentication.AuthenticationResult
+import com.google.firebase.auth.FirebaseUser
 import dev.anmatolay.template.xml.core.authentication.Authenticator
-import dev.anmatolay.template.xml.domain.model.User
+import dev.anmatolay.template.xml.core.authentication.UnknownAuthErrorException
+import dev.anmatolay.template.xml.core.authentication.UserProvider
+import io.reactivex.rxjava3.core.Completable
 import timber.log.Timber
 
-class AuthenticatorImpl(private val firebaseAuth: FirebaseAuth) : Authenticator {
-    override fun signInAnonymously(): AuthenticationResult {
-        return FirebaseAuthResultImpl(firebaseAuth.signInAnonymously(), firebaseAuth)
-    }
+class AuthenticatorImpl(private val firebaseAuth: FirebaseAuth) : Authenticator() {
 
-    class FirebaseAuthResultImpl(
-        private val task: Task<AuthResult>,
-        private val firebaseAuth: FirebaseAuth,
-    ) : AuthenticationResult.FirebaseAuthResult() {
-        override fun onComplete() {
-            task.addOnCompleteListener { task ->
+    override fun signInAnonymously() = Completable.create { emitter ->
+        firebaseAuth.signInAnonymously()
+            .addOnCompleteListener { task ->
                 val currentUser = firebaseAuth.currentUser
                 if (task.isSuccessful && currentUser != null) {
-                    User(currentUser.uid)
+                    this.currentUser = UserProvider.FirebaseUser(currentUser)
+                    Timber.d("User logged in")
+                    emitter.onComplete()
                 } else {
-                    Timber.tag("FirebaseAuth").e(task.exception)
+                    val exception = task.exception
+                    Timber.tag("FirebaseAuth").e(exception)
+                    emitter.onError(
+                        exception ?: UnknownAuthErrorException(
+                            task.isSuccessful,
+                            currentUser.isNull(),
+                        )
+                    )
                 }
             }
-        }
     }
 }
+
+private fun FirebaseUser?.isNull(): Boolean = this == null

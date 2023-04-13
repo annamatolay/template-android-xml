@@ -4,6 +4,7 @@ import android.app.Application
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.crashlytics.FirebaseCrashlytics
+import dev.anmatolay.template.xml.core.authentication.Authenticator
 import dev.anmatolay.template.xml.di.KoinInitializer
 import dev.anmatolay.template.xml.util.logging.CrashlyticsLogTree
 import dev.anmatolay.template.xml.util.logging.DiamondDebugTree
@@ -13,6 +14,7 @@ import timber.log.Timber
 class TemplateApplication : Application() {
 
     private val firebaseCrashlytics by inject<FirebaseCrashlytics>()
+    private val authenticator by inject<Authenticator>()
 
     override fun onCreate() {
         super.onCreate()
@@ -25,5 +27,9 @@ class TemplateApplication : Application() {
             else
                 CrashlyticsLogTree(firebaseCrashlytics)
         )
+
+        authenticator.signInAnonymously()
+            .subscribe()
+            .dispose()
     }
 }
