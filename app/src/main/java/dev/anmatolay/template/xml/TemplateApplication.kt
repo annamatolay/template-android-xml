@@ -2,7 +2,7 @@ package dev.anmatolay.template.xml
 
 import android.app.Application
 import dev.anmatolay.template.xml.core.authentication.Authenticator
-import dev.anmatolay.template.xml.di.KoinInitializer
+import dev.anmatolay.template.xml.core.di.KoinInitializer
 import dev.anmatolay.template.xml.domain.model.User
 import dev.anmatolay.template.xml.domain.usecase.MonitoringUseCase
 import dev.anmatolay.template.xml.domain.usecase.UserCacheUseCase

@@ -1,8 +1,7 @@
 package dev.anmatolay.template.xml.data.local
 
-import dev.anmatolay.template.xml.core.authentication.Authenticator
-import dev.anmatolay.template.xml.util.SharedPrefHandler
-import dev.anmatolay.template.xml.util.toMaybe
+import dev.anmatolay.template.xml.core.SharedPrefHandler
+import dev.anmatolay.template.xml.util.extension.toMaybe
 import io.reactivex.rxjava3.core.Maybe
 
 class UserIdDataSource(private val sharedPrefHandler: SharedPrefHandler) {

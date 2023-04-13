@@ -1,4 +1,4 @@
-package dev.anmatolay.template.xml.util
+package dev.anmatolay.template.xml.core
 
 import android.content.Context
 import android.content.SharedPreferences

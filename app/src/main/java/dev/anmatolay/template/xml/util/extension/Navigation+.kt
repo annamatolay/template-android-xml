@@ -1,4 +1,4 @@
-package dev.anmatolay.template.xml.util
+package dev.anmatolay.template.xml.util.extension
 
 import android.app.Activity
 import android.view.View

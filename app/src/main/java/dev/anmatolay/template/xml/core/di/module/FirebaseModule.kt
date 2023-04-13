@@ -1,4 +1,4 @@
-package dev.anmatolay.template.xml.di.module
+package dev.anmatolay.template.xml.core.di.module
 
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.auth.FirebaseAuth

@@ -1,4 +1,4 @@
-package dev.anmatolay.template.xml.util.logging
+package dev.anmatolay.template.xml.core.logging
 
 import timber.log.Timber.DebugTree
 

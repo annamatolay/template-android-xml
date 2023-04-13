@@ -1,4 +1,4 @@
-package dev.anmatolay.template.xml.di.module
+package dev.anmatolay.template.xml.core.di.module
 
 import dev.anmatolay.template.xml.data.local.UserIdDataSource
 import dev.anmatolay.template.xml.presentation.MainActivityViewModel

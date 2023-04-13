@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import dev.anmatolay.template.xml.R
 import dev.anmatolay.template.xml.core.presentation.BaseFragment
-import dev.anmatolay.template.xml.util.navigateTo
+import dev.anmatolay.template.xml.util.extension.navigateTo
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import org.koin.android.ext.android.inject
 

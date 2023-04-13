@@ -4,8 +4,8 @@ import com.google.firebase.crashlytics.FirebaseCrashlytics
 import dev.anmatolay.template.xml.BuildConfig
 import dev.anmatolay.template.xml.core.analytic.AnalyticsWrapper
 import dev.anmatolay.template.xml.util.UserProperty
-import dev.anmatolay.template.xml.util.logging.CrashlyticsLogTree
-import dev.anmatolay.template.xml.util.logging.DiamondDebugTree
+import dev.anmatolay.template.xml.core.logging.CrashlyticsLogTree
+import dev.anmatolay.template.xml.core.logging.DiamondDebugTree
 import timber.log.Timber
 
 class MonitoringUseCase(

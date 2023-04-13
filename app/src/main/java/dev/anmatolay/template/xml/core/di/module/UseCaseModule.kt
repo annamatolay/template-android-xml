@@ -1,4 +1,4 @@
-package dev.anmatolay.template.xml.di.module
+package dev.anmatolay.template.xml.core.di.module
 
 import dev.anmatolay.template.xml.domain.usecase.MonitoringUseCase
 import dev.anmatolay.template.xml.domain.usecase.UserCacheUseCase
