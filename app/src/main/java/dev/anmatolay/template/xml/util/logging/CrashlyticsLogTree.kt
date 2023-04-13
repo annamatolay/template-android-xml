@@ -5,11 +5,14 @@ import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.google.firebase.crashlytics.ktx.setCustomKeys
 import timber.log.Timber
 
-class CrashlyticsLogTree(private val firebaseCrashlytics: FirebaseCrashlytics) : Timber.Tree() {
+class CrashlyticsLogTree(
+    private val firebaseCrashlytics: FirebaseCrashlytics,
+    private val userId: String?,
+) : Timber.Tree() {
     override fun log(priority: Int, tag: String?, message: String, t: Throwable?) {
         if (priority < Log.ERROR) return
 
-//        firebaseCrashlytics.setUserId()
+        firebaseCrashlytics.setUserId(userId ?: "null")
         firebaseCrashlytics.setCustomKeys {
             tag?.let { key(CRASHLYTICS_KEY_TAG, it) }
             key(CRASHLYTICS_KEY_MESSAGE, message)
