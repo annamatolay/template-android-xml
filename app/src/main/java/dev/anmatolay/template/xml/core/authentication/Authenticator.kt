@@ -8,7 +8,7 @@ abstract class Authenticator(private val sharedPrefHandler: SharedPrefHandler) {
 
     protected var userProvider:
             UserProvider? by Delegates.observable(null) { _, _, userProvider ->
-        userProvider.getUserId()?.let { sharedPrefHandler.setString(KEY_USER_ID, it) }
+        userProvider.getUserId()?.let { sharedPrefHandler.putString(KEY_USER_ID, it) }
     }
 
     private fun UserProvider?.getUserId() =
