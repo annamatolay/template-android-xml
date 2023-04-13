@@ -1,6 +1,7 @@
 package dev.anmatolay.template.xml.util
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.content.SharedPreferences.Editor
 import dev.anmatolay.template.xml.BuildConfig
 import dev.anmatolay.template.xml.core.network.MoshiFactory
@@ -8,7 +9,8 @@ import timber.log.Timber
 
 class SharedPrefHandler(context: Context) {
 
-    val sharedPref = context.getSharedPreferences(BuildConfig.APPLICATION_ID, Context.MODE_PRIVATE)
+    private val sharedPref: SharedPreferences =
+        context.getSharedPreferences(BuildConfig.APPLICATION_ID, Context.MODE_PRIVATE)
 
     fun getString(key: String, defaultValue: String? = null): String? =
         sharedPref.getString(key, defaultValue).logResult(key)
@@ -27,24 +29,6 @@ class SharedPrefHandler(context: Context) {
 
     fun setInt(key: String, value: Int) =
         edit { it.putInt(key, value) }
-
-    inline fun <reified T> getObject(key: String): T? {
-        val jsonString = getString(key)
-        val adapter = MoshiFactory.create().adapter(T::class.java)
-        return if (jsonString != null) {
-            adapter.fromJson(jsonString)
-        } else null
-    }
-
-    inline fun <reified T> setObject(key: String, value: T) {
-        val adapter = MoshiFactory.create().adapter(T::class.java)
-        val jsonString = adapter.toJson(value)
-        with(sharedPref.edit()) {
-            setString(key, jsonString)
-            commit()
-        }
-        Timber.d("${T::class.java.typeName} data retrieved. KEY: $key VALUE: $this")
-    }
 
     private inline fun <reified T>T.logResult(key: String): T =
         this.apply { Timber.d("${T::class.java.typeName} data retrieved. KEY: $key VALUE: $this") }
