@@ -1,4 +1,4 @@
-package dev.anmatolay.template.xml.di
+package dev.anmatolay.template.xml.di.module
 
 import dev.anmatolay.template.xml.presentation.MainActivityViewModel
 import dev.anmatolay.template.xml.presentation.home.HomeViewModel
