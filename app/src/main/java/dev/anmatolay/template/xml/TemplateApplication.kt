@@ -22,22 +22,18 @@ class TemplateApplication : Application() {
     override fun onCreate() {
         super.onCreate()
 
-
         KoinInitializer.init(this)
+
+        setUpAnalyticsAndLogging(getUserId())
 
         val userId = getUserId()
 
         if (userId == null) {
             setUserProperties()
             authenticator.signInAnonymously()
-                .doOnError { throwable ->
-                    Timber.tag("App init - signInAnonymously").e(throwable)
-                    setUpAnalyticsAndLogging(null)
-                }
-                .subscribe { getUserId()?.let { setUpAnalyticsAndLogging(it) } }
+                .doOnError { Timber.tag("App init - signInAnonymously").e(it) }
+                .subscribe()
                 .dispose()
-        } else {
-            setUpAnalyticsAndLogging(userId)
         }
     }
 
