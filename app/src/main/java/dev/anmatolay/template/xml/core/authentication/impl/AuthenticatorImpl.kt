@@ -5,14 +5,12 @@ import com.google.firebase.auth.FirebaseUser
 import dev.anmatolay.template.xml.core.authentication.Authenticator
 import dev.anmatolay.template.xml.core.authentication.UnknownAuthErrorException
 import dev.anmatolay.template.xml.core.authentication.UserProvider
-import dev.anmatolay.template.xml.util.SharedPrefHandler
 import io.reactivex.rxjava3.core.Completable
 import timber.log.Timber
 
 class AuthenticatorImpl(
     private val firebaseAuth: FirebaseAuth,
-    sharedPrefHandler: SharedPrefHandler,
-) : Authenticator(sharedPrefHandler) {
+) : Authenticator() {
 
     override fun signInAnonymously() = Completable.create { emitter ->
         firebaseAuth.signInAnonymously()

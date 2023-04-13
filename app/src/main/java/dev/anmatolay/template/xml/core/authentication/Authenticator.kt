@@ -1,15 +1,20 @@
 package dev.anmatolay.template.xml.core.authentication
 
-import dev.anmatolay.template.xml.util.SharedPrefHandler
+import dev.anmatolay.template.xml.domain.usecase.UserCacheUseCase
 import io.reactivex.rxjava3.core.Completable
+import org.koin.java.KoinJavaComponent.inject
 import kotlin.properties.Delegates
 
-abstract class Authenticator(private val sharedPrefHandler: SharedPrefHandler) {
+abstract class Authenticator {
+
+    private val useCase by inject<UserCacheUseCase>(UserCacheUseCase::class.java)
 
     protected var userProvider:
             UserProvider? by Delegates.observable(null) { _, _, userProvider ->
-        userProvider.getUserId()?.let { sharedPrefHandler.putString(KEY_USER_ID, it) }
+        userProvider.getUserId()?.let { useCase.cacheUserId(it) }
     }
+
+    abstract fun signInAnonymously(): Completable
 
     private fun UserProvider?.getUserId() =
         when (this) {
@@ -17,10 +22,4 @@ abstract class Authenticator(private val sharedPrefHandler: SharedPrefHandler) {
             is UserProvider.FirebaseUser -> this.user.uid
             null -> null
         }
-
-    abstract fun signInAnonymously(): Completable
-
-    companion object {
-        const val KEY_USER_ID = "key_user_id"
-    }
 }

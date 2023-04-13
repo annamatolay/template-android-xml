@@ -13,7 +13,7 @@ import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 
 val appModule = module {
-    factory<Authenticator> { AuthenticatorImpl(get(), get()) }
+    factory<Authenticator> { AuthenticatorImpl(get()) }
     factory<Analytics> { FirebaseAnalyticsImpl(get()) }
     factory<SchedulerProvider> { SchedulerProviderImpl() }
     single { MoshiFactory.create() }

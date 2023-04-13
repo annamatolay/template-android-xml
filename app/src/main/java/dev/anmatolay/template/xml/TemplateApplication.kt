@@ -5,7 +5,8 @@ import com.google.firebase.crashlytics.FirebaseCrashlytics
 import dev.anmatolay.template.xml.core.analytic.Analytics
 import dev.anmatolay.template.xml.core.authentication.Authenticator
 import dev.anmatolay.template.xml.di.KoinInitializer
-import dev.anmatolay.template.xml.util.SharedPrefHandler
+import dev.anmatolay.template.xml.domain.model.User
+import dev.anmatolay.template.xml.domain.usecase.UserCacheUseCase
 import dev.anmatolay.template.xml.util.UserProperty
 import dev.anmatolay.template.xml.util.logging.CrashlyticsLogTree
 import dev.anmatolay.template.xml.util.logging.DiamondDebugTree
@@ -17,18 +18,25 @@ class TemplateApplication : Application() {
     private val crashlytics by inject<FirebaseCrashlytics>()
     private val analytics by inject<Analytics>()
     private val authenticator by inject<Authenticator>()
-    private val sharedPrefHandler by inject<SharedPrefHandler>()
+    private val userCacheUseCase by inject<UserCacheUseCase>()
+
+    private var user: User? = null
+
+    init {
+        userCacheUseCase.getCachedOrDefaultUser()
+            .doOnSuccess { user }
+            .subscribe()
+            .dispose()
+    }
 
     override fun onCreate() {
         super.onCreate()
 
         KoinInitializer.init(this)
 
-        setUpAnalyticsAndLogging(getUserId())
+        setUpAnalyticsAndLogging(user?.id)
 
-        val userId = getUserId()
-
-        if (userId == null) {
+        if (user?.id == null) {
             setUserProperties()
             authenticator.signInAnonymously()
                 .doOnError { Timber.tag("App init - signInAnonymously").e(it) }
@@ -36,8 +44,6 @@ class TemplateApplication : Application() {
                 .dispose()
         }
     }
-
-    private fun getUserId() = sharedPrefHandler.getString(Authenticator.KEY_USER_ID)
 
     private fun setUserProperties() {
         analytics.setUserProperty(KEY_APP_VERSION, UserProperty.version)
