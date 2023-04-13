@@ -15,7 +15,7 @@ class FakeAuthenticatorImpl(
 
     override fun signInAnonymously() = Completable.create { emitter ->
         if (isSuccessful) {
-            currentUser = UserProvider.FakeUser(userId)
+            userProvider = UserProvider.FakeUser(userId)
             emitter.onComplete()
         } else {
             emitter.onError(

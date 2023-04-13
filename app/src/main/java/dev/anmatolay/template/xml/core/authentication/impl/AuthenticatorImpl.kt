@@ -19,12 +19,14 @@ class AuthenticatorImpl(
             .addOnCompleteListener { task ->
                 val currentUser = firebaseAuth.currentUser
                 if (task.isSuccessful && currentUser != null) {
-                    this.currentUser = UserProvider.FirebaseUser(currentUser)
-                    Timber.d("User logged in")
+                    userProvider = UserProvider.FirebaseUser(currentUser)
+                    Timber
+                        .tag(TAG)
+                        .i("User anonymously signed in with ID: ${currentUser.uid}")
                     emitter.onComplete()
                 } else {
                     val exception = task.exception
-                    Timber.tag("FirebaseAuth").e(exception)
+                    Timber.tag(TAG).e(exception)
                     emitter.onError(
                         exception ?: UnknownAuthErrorException(
                             task.isSuccessful,
@@ -33,6 +35,14 @@ class AuthenticatorImpl(
                     )
                 }
             }
+            .addOnFailureListener { exception ->
+                emitter.onError(exception)
+                Timber.tag(TAG).e(exception)
+            }
+    }
+
+    companion object {
+        private const val TAG = "Firebase Authenticator"
     }
 }
 

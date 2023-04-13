@@ -1,8 +1,6 @@
 package dev.anmatolay.template.xml
 
 import android.app.Application
-import android.os.Build
-import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import dev.anmatolay.template.xml.core.analytic.Analytics
 import dev.anmatolay.template.xml.core.authentication.Authenticator
@@ -32,10 +30,14 @@ class TemplateApplication : Application() {
         if (userId == null) {
             setUserProperties()
             authenticator.signInAnonymously()
-                .subscribe { getUserId()?.let { setUpLogging(it) } }
+                .doOnError { throwable ->
+                    Timber.tag("App init - signInAnonymously").e(throwable)
+                    setUpAnalyticsAndLogging(null)
+                }
+                .subscribe { getUserId()?.let { setUpAnalyticsAndLogging(it) } }
                 .dispose()
         } else {
-            setUpLogging(userId)
+            setUpAnalyticsAndLogging(userId)
         }
     }
 
@@ -47,7 +49,7 @@ class TemplateApplication : Application() {
         analytics.setUserProperty(KEY_ANDROID_VERSION, UserProperty.version)
     }
 
-    private fun setUpLogging(userId: String?) {
+    private fun setUpAnalyticsAndLogging(userId: String?) {
         analytics.setUserId(userId)
         Timber.plant(
             if (BuildConfig.DEBUG)
@@ -58,8 +60,8 @@ class TemplateApplication : Application() {
     }
 
     companion object {
-        private const val KEY_APP_VERSION ="version_name"
-        private const val KEY_API_LEVEL ="api_level"
-        private const val KEY_ANDROID_VERSION ="android_version"
+        private const val KEY_APP_VERSION = "version_name"
+        private const val KEY_API_LEVEL = "api_level"
+        private const val KEY_ANDROID_VERSION = "android_version"
     }
 }

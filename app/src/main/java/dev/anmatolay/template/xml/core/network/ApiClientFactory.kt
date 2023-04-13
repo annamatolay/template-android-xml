@@ -20,7 +20,7 @@ object ApiClientFactory {
     private const val timeOutInSeconds = 60L
 
     private val logger =
-        HttpLoggingInterceptor.Logger { message -> Timber.tag("OkHttp").d(message) }
+        HttpLoggingInterceptor.Logger { message -> Timber.tag("Retrofit - OkHttp").d(message) }
     private val loggingInterceptor = HttpLoggingInterceptor(logger).setLevel(
         if (BuildConfig.DEBUG)
             HttpLoggingInterceptor.Level.BODY

@@ -2,12 +2,11 @@ package dev.anmatolay.template.xml.core.authentication
 
 import dev.anmatolay.template.xml.util.SharedPrefHandler
 import io.reactivex.rxjava3.core.Completable
-import timber.log.Timber
 import kotlin.properties.Delegates
 
 abstract class Authenticator(private val sharedPrefHandler: SharedPrefHandler) {
 
-    protected var currentUser:
+    protected var userProvider:
             UserProvider? by Delegates.observable(null) { _, _, userProvider ->
         userProvider.getUserId()?.let { sharedPrefHandler.setString(KEY_USER_ID, it) }
     }
