@@ -1,6 +1,8 @@
 package dev.anmatolay.template.xml.di
 
 import android.app.Application
+import dev.anmatolay.template.xml.di.module.firebaseModule
+import dev.anmatolay.template.xml.di.module.viewModelModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
@@ -12,6 +14,7 @@ object KoinInitializer {
             androidContext(application)
             modules(
                 appModule,
+                firebaseModule,
                 viewModelModule,
             )
         }
