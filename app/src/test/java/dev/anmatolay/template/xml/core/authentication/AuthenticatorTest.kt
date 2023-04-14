@@ -43,4 +43,3 @@ class AuthenticatorTest : BaseTest() {
         }
     }
 }
-}

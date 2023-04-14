@@ -48,7 +48,7 @@ dependencies {
     def okhttp3_version = "4.10.0"
     def moshi_version = "1.14.0"
     def mockk_version = "1.12.0"
-    def lifecycle_version = "2.5.1"
+    def lifecycle_version = "2.6.1"
 
     implementation 'androidx.core:core-ktx:1.10.0'
     implementation 'androidx.appcompat:appcompat:1.6.1'
@@ -58,10 +58,7 @@ dependencies {
 //    implementation 'androidx.cardview:cardview:1.0.0'
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
-    // lifecycle-reactivestreams-ktx has issue in 2.6.0 - 2.6.1 versions
-    //noinspection GradleDependency
     implementation "androidx.lifecycle:lifecycle-common-java8:$lifecycle_version"
-    //noinspection GradleDependency
     implementation "androidx.lifecycle:lifecycle-reactivestreams-ktx:$lifecycle_version"
 //    implementation "androidx.lifecycle:lifecycle-viewmodel-savedstate:$lifecycle_version"
 //    implementation "androidx.lifecycle:lifecycle-process:$lifecycle_version"
@@ -88,7 +85,6 @@ dependencies {
 
     testImplementation 'junit:junit:4.13.2'
     testImplementation "androidx.arch.core:core-testing:2.2.0"
-    //noinspection GradleDependency
     testImplementation "androidx.lifecycle:lifecycle-runtime-testing:$lifecycle_version"
     testImplementation "com.squareup.okhttp3:mockwebserver:$okhttp3_version"
     testImplementation "io.mockk:mockk:$mockk_version"
