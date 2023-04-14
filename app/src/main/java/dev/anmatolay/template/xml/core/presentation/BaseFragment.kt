@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.annotation.CallSuper
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.LiveData
 import dev.anmatolay.template.xml.core.NavigationEvent
 import timber.log.Timber
 
@@ -43,5 +44,8 @@ abstract class BaseFragment : Fragment() {
         viewModel.navigationEvents.observe(viewLifecycleOwner) { event ->
             function(event)
         }
+    }
+    protected fun <T> LiveData<T>.observe(observer: (T) -> Unit) {
+        observe(viewLifecycleOwner, observer)
     }
 }

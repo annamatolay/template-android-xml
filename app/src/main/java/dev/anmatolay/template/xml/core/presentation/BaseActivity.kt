@@ -3,6 +3,7 @@ package dev.anmatolay.template.xml.core.presentation
 import android.os.Bundle
 import androidx.annotation.CallSuper
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.LiveData
 import dev.anmatolay.template.xml.core.NavigationEvent
 import timber.log.Timber
 
@@ -42,5 +43,9 @@ abstract class BaseActivity : AppCompatActivity() {
         viewModel.navigationEvents.observe(this) { event ->
             function(event)
         }
+    }
+
+    protected fun <T> LiveData<T>.observe(observer: (T) -> Unit) {
+        observe(this@BaseActivity, observer)
     }
 }
