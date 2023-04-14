@@ -9,6 +9,8 @@ import dev.anmatolay.template.xml.core.network.MoshiFactory
 import dev.anmatolay.template.xml.core.threading.SchedulerProvider
 import dev.anmatolay.template.xml.core.threading.impl.SchedulerProviderImpl
 import dev.anmatolay.template.xml.core.SharedPrefHandler
+import dev.anmatolay.template.xml.util.UserProperty
+import dev.anmatolay.template.xml.util.UserPropertyImpl
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 
@@ -19,4 +21,5 @@ val appModule = module {
     single { MoshiFactory.create() }
     single { ApiClientFactory.createRetrofit() }
     factory { SharedPrefHandler(androidContext()) }
+    factory<UserProperty> { UserPropertyImpl }
 }

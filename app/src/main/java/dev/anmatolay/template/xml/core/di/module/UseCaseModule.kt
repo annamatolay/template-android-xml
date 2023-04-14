@@ -6,5 +6,5 @@ import org.koin.dsl.module
 
 val useCaseModule = module {
     factory { UserCacheUseCase(get()) }
-    factory { MonitoringUseCase(get(), get()) }
+    factory { MonitoringUseCase(get(), get(), get()) }
 }
