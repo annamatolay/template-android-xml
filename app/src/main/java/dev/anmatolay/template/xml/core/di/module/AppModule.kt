@@ -3,7 +3,7 @@ package dev.anmatolay.template.xml.di
 import dev.anmatolay.template.xml.core.analytic.AnalyticsWrapper
 import dev.anmatolay.template.xml.core.analytic.impl.FirebaseAnalyticsImpl
 import dev.anmatolay.template.xml.core.authentication.Authenticator
-import dev.anmatolay.template.xml.core.authentication.impl.AuthenticatorImpl
+import dev.anmatolay.template.xml.core.authentication.impl.FirebaseAuthenticatorImpl
 import dev.anmatolay.template.xml.core.network.ApiClientFactory
 import dev.anmatolay.template.xml.core.network.MoshiFactory
 import dev.anmatolay.template.xml.core.threading.SchedulerProvider
@@ -13,7 +13,7 @@ import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 
 val appModule = module {
-    factory<Authenticator> { AuthenticatorImpl(get()) }
+    factory<Authenticator> { FirebaseAuthenticatorImpl(get()) }
     factory<AnalyticsWrapper> { FirebaseAnalyticsImpl(get()) }
     factory<SchedulerProvider> { SchedulerProviderImpl() }
     single { MoshiFactory.create() }

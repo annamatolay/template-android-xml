@@ -8,7 +8,7 @@ import dev.anmatolay.template.xml.core.authentication.UserProvider
 import io.reactivex.rxjava3.core.Completable
 import timber.log.Timber
 
-class AuthenticatorImpl(
+class FirebaseAuthenticatorImpl(
     private val firebaseAuth: FirebaseAuth,
 ) : Authenticator() {
 
