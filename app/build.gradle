@@ -40,6 +40,11 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
+    // https://github.com/firebase/firebase-android-sdk/issues/1907#issuecomment-680981365
+    configurations.configureEach {
+        exclude group: "com.google.protobuf", module: "protobuf-lite"
+    }
 }
 
 dependencies {
@@ -86,15 +91,19 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     testImplementation "androidx.arch.core:core-testing:2.2.0"
     testImplementation "androidx.lifecycle:lifecycle-runtime-testing:$lifecycle_version"
-    testImplementation "com.squareup.okhttp3:mockwebserver:$okhttp3_version"
     testImplementation "io.mockk:mockk:$mockk_version"
     testImplementation "io.insert-koin:koin-test:$koin_version"
     testImplementation "io.insert-koin:koin-test-junit4:$koin_version"
+    androidTestUtil "androidx.test:orchestrator:1.4.2"
+    androidTestImplementation "androidx.test:core:1.5.0"
+    androidTestImplementation "androidx.test:core-ktx:1.5.0"
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
-    androidTestImplementation 'androidx.test:runner:1.5.3'
+    androidTestImplementation "androidx.test.ext:junit-ktx:1.1.5"
+    androidTestImplementation 'androidx.test:runner:1.5.2'
     androidTestImplementation 'androidx.test:rules:1.5.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 //    androidTestImplementation "androidx.test.espresso:espresso-idling-resource:$espressoVersion"
+    androidTestImplementation "com.squareup.okhttp3:mockwebserver:$okhttp3_version"
     androidTestImplementation "io.mockk:mockk-android:$mockk_version"
     androidTestImplementation 'io.github.kakaocup:kakao:3.2.3'
 }
