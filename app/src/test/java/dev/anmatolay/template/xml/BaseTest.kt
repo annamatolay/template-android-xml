@@ -62,7 +62,8 @@ open class BaseTest : KoinTest {
                     factory { sharedPrefHandler }
                     factory<UserProperty> { MockUserPropertyImpl }
                     mockFirebase()
-                })
+                }
+            )
             modules(additionalModules.toList())
             modules(
                 module {

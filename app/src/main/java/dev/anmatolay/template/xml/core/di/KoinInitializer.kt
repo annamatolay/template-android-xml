@@ -1,7 +1,7 @@
 package dev.anmatolay.template.xml.core.di
 
 import android.app.Application
-import dev.anmatolay.template.xml.di.appModule
+import dev.anmatolay.template.xml.core.di.module.appModule
 import dev.anmatolay.template.xml.core.di.module.dataSourceModule
 import dev.anmatolay.template.xml.core.di.module.firebaseModule
 import dev.anmatolay.template.xml.core.di.module.useCaseModule

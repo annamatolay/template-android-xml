@@ -1,4 +1,4 @@
-package dev.anmatolay.template.xml.di
+package dev.anmatolay.template.xml.core.di.module
 
 import dev.anmatolay.template.xml.core.analytic.AnalyticsWrapper
 import dev.anmatolay.template.xml.core.analytic.impl.FirebaseAnalyticsImpl

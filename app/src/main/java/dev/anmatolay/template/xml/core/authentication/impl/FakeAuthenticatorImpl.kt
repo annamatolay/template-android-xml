@@ -5,7 +5,7 @@ import dev.anmatolay.template.xml.core.authentication.UnknownAuthErrorException
 import dev.anmatolay.template.xml.core.authentication.UserProvider
 import io.reactivex.rxjava3.core.Completable
 
-class FakeAuthenticatorImpl() : Authenticator() {
+class FakeAuthenticatorImpl : Authenticator() {
 
     var isSuccessful: Boolean = false
     var userId = ""
