@@ -1,18 +1,21 @@
 package dev.anmatolay.template.xml.core.presentation
 
 import androidx.annotation.CallSuper
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.toLiveData
 import com.jakewharton.rxrelay3.PublishRelay
 import dev.anmatolay.template.xml.core.NavigationEvent
-import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.core.BackpressureStrategy
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.disposables.Disposable
 import timber.log.Timber
 
-open class BaseViewModel {
+open class BaseViewModel: ViewModel() {
 
     private val navigator = PublishRelay.create<NavigationEvent>()
-    val navigationEvents: Observable<NavigationEvent>
-        get() = navigator
+    val navigationEvents: LiveData<NavigationEvent>
+        get() = navigator.toFlowable(BackpressureStrategy.LATEST).toLiveData()
 
     private var aliveDisposables = CompositeDisposable()
     private var foregroundDisposables = CompositeDisposable()

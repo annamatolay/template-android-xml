@@ -3,24 +3,16 @@ package dev.anmatolay.template.xml.core.presentation
 import android.os.Bundle
 import androidx.annotation.CallSuper
 import androidx.appcompat.app.AppCompatActivity
-import io.reactivex.rxjava3.disposables.CompositeDisposable
-import io.reactivex.rxjava3.disposables.Disposable
+import dev.anmatolay.template.xml.core.NavigationEvent
 import timber.log.Timber
 
 abstract class BaseActivity : AppCompatActivity() {
 
     protected abstract val viewModel: BaseViewModel
-    private var aliveDisposables = CompositeDisposable()
-    private var foregroundDisposables = CompositeDisposable()
-
-    protected fun Disposable.disposeOnPause() = foregroundDisposables.add(this)
-
-    protected fun Disposable.disposeOnDestroy() = aliveDisposables.add(this)
 
     @CallSuper
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        aliveDisposables = CompositeDisposable()
         viewModel.onViewCreated()
         Timber.d("${this.javaClass.simpleName} - onCreate")
     }
@@ -28,14 +20,12 @@ abstract class BaseActivity : AppCompatActivity() {
     @CallSuper
     override fun onResume() {
         super.onResume()
-        foregroundDisposables = CompositeDisposable()
         viewModel.onViewResumed()
         Timber.d("${this.javaClass.simpleName} - onResume")
     }
 
     @CallSuper
     override fun onPause() {
-        foregroundDisposables.clear()
         viewModel.onViewPaused()
         super.onPause()
         Timber.d("${this.javaClass.simpleName} - onPause")
@@ -43,9 +33,14 @@ abstract class BaseActivity : AppCompatActivity() {
 
     @CallSuper
     override fun onDestroy() {
-        aliveDisposables.clear()
         viewModel.onDestroyView()
         super.onDestroy()
         Timber.d("${this.javaClass.simpleName} - onDestroy")
+    }
+
+    protected fun onNavigationEventReceived(function: (NavigationEvent) -> Unit) {
+        viewModel.navigationEvents.observe(this) { event ->
+            function(event)
+        }
     }
 }

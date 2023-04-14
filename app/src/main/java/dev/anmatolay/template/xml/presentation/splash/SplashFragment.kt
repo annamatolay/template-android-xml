@@ -8,11 +8,10 @@ import androidx.appcompat.app.AppCompatActivity
 import dev.anmatolay.template.xml.R
 import dev.anmatolay.template.xml.core.presentation.BaseFragment
 import dev.anmatolay.template.xml.util.extension.navigateTo
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SplashFragment : BaseFragment() {
-    override val viewModel by inject<SplashViewModel>()
+    override val viewModel by viewModel<SplashViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -25,15 +24,12 @@ class SplashFragment : BaseFragment() {
 
         getAppActionBar()?.hide()
 
-        viewModel.navigationEvents
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe { event ->
-                when (event) {
-                    SplashNavigationEvent.Home ->
-                        navigateTo(SplashFragmentDirections.actionToHomeFragment())
-                }
+        onNavigationEventReceived { event ->
+            when (event) {
+                SplashNavigationEvent.Home ->
+                    navigateTo(SplashFragmentDirections.actionToHomeFragment())
             }
-            .disposeOnPause()
+        }
     }
 
     override fun onDetach() {
