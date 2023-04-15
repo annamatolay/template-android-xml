@@ -5,8 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
-import dev.anmatolay.template.xml.R
 import dev.anmatolay.template.xml.core.presentation.BaseFragment
+import dev.anmatolay.template.xml.databinding.FragmentSplashBinding
 import dev.anmatolay.template.xml.util.extension.navigateTo
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -17,7 +17,10 @@ class SplashFragment : BaseFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? = inflater.inflate(R.layout.fragment_splash, container, false)
+    ): View =
+        FragmentSplashBinding.inflate(inflater, container, false)
+            .apply { binding = this }
+            .root
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

@@ -4,12 +4,14 @@ import android.os.Bundle
 import androidx.annotation.CallSuper
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.LiveData
+import androidx.viewbinding.ViewBinding
 import dev.anmatolay.template.xml.core.NavigationEvent
 import timber.log.Timber
 
 abstract class BaseActivity : AppCompatActivity() {
 
     protected abstract val viewModel: BaseViewModel
+    protected lateinit var binding: ViewBinding
 
     @CallSuper
     override fun onCreate(savedInstanceState: Bundle?) {
