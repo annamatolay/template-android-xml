@@ -23,6 +23,7 @@ class KoinTestRule(
                 appModule,
                 firebaseModule,
                 viewModelModule,
+                repositoryModule,
                 useCaseModule,
                 dataSourceModule,
             )

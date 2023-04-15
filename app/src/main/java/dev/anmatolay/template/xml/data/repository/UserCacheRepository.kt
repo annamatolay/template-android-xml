@@ -1,15 +1,16 @@
-package dev.anmatolay.template.xml.domain.usecase
+package dev.anmatolay.template.xml.data.repository
 
 import dev.anmatolay.template.xml.data.local.UserIdDataSource
 import dev.anmatolay.template.xml.domain.model.User
+import dev.anmatolay.template.xml.util.Constants
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Single
 
-class UserCacheUseCase(private val dataSource: UserIdDataSource) {
+class UserCacheRepository(private val dataSource: UserIdDataSource) {
 
     fun getCachedOrDefaultUser(): Single<User> =
         dataSource.getUserId()
-            .defaultIfEmpty("null")
+            .defaultIfEmpty(Constants.USER_DEFAULT_ID)
             .map { User(it) }
 
     fun cacheUserId(id: String): Completable =

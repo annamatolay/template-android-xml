@@ -11,7 +11,7 @@ import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.disposables.Disposable
 import timber.log.Timber
 
-open class BaseViewModel: ViewModel() {
+abstract class BaseViewModel: ViewModel() {
 
     private val navigator = PublishRelay.create<NavigationEvent>()
     val navigationEvents: LiveData<NavigationEvent>

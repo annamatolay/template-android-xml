@@ -3,6 +3,7 @@ package dev.anmatolay.template.xml.core.logging
 import android.util.Log
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.google.firebase.crashlytics.ktx.setCustomKeys
+import dev.anmatolay.template.xml.util.Constants.USER_DEFAULT_ID
 import timber.log.Timber
 
 class CrashlyticsLogTree(
@@ -12,7 +13,7 @@ class CrashlyticsLogTree(
     override fun log(priority: Int, tag: String?, message: String, t: Throwable?) {
         if (priority < Log.ERROR) return
 
-        firebaseCrashlytics.setUserId(userId ?: "null")
+        firebaseCrashlytics.setUserId(userId ?: USER_DEFAULT_ID)
         firebaseCrashlytics.setCustomKeys {
             tag?.let { key(CRASHLYTICS_KEY_TAG, it) }
             key(CRASHLYTICS_KEY_MESSAGE, message)

@@ -8,7 +8,7 @@ import io.reactivex.rxjava3.core.Completable
 class FakeAuthenticatorImpl : Authenticator() {
 
     var isSuccessful: Boolean = false
-    var userId = ""
+    var userId = "null"
 
     override fun signInAnonymously() = Completable.create { emitter ->
         if (isSuccessful) {
@@ -18,7 +18,7 @@ class FakeAuthenticatorImpl : Authenticator() {
             emitter.onError(
                 UnknownAuthErrorException(
                     isTaskSuccessful = false,
-                    isCurrentUserNull = false,
+                    isCurrentUserNull = true,
                 )
             )
         }

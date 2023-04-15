@@ -1,6 +1,6 @@
 package dev.anmatolay.template.xml.domain.usecase
 
-import dev.anmatolay.template.xml.util.TestContains.TEST_USER_ID
+import dev.anmatolay.template.xml.util.TestConstants.TEST_USER_ID
 import dev.anmatolay.template.xml.BaseTest
 import dev.anmatolay.template.xml.util.MockUserPropertyImpl.TEST_VALUE_INT
 import dev.anmatolay.template.xml.util.MockUserPropertyImpl.TEST_VALUE_STRING

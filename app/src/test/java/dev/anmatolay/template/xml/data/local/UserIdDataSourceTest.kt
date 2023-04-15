@@ -1,7 +1,7 @@
 package dev.anmatolay.template.xml.data.local
 
 import dev.anmatolay.template.xml.util.Constants.KEY_USER_ID
-import dev.anmatolay.template.xml.util.TestContains.TEST_USER_ID
+import dev.anmatolay.template.xml.util.TestConstants.TEST_USER_ID
 import dev.anmatolay.template.xml.BaseTest
 import io.mockk.every
 import io.mockk.justRun
