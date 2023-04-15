@@ -9,7 +9,9 @@ import dev.anmatolay.template.xml.databinding.FragmentHomeBinding
 import org.koin.android.ext.android.inject
 
 class HomeFragment : BaseFragment() {
+
     override val viewModel by inject<HomeViewModel>()
+    private lateinit var binding: FragmentHomeBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,

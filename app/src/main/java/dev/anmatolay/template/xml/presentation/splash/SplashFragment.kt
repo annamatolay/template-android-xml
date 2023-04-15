@@ -3,15 +3,20 @@ package dev.anmatolay.template.xml.presentation.splash
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.INVISIBLE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.appbar.AppBarLayout
+import dev.anmatolay.template.xml.R
 import dev.anmatolay.template.xml.core.presentation.BaseFragment
 import dev.anmatolay.template.xml.databinding.FragmentSplashBinding
 import dev.anmatolay.template.xml.util.extension.navigateTo
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SplashFragment : BaseFragment() {
+
     override val viewModel by viewModel<SplashViewModel>()
+    private lateinit var binding: FragmentSplashBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -25,7 +30,7 @@ class SplashFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        getAppActionBar()?.hide()
+        setAppBarLayoutVisibility(INVISIBLE)
 
         onNavigationEventReceived { event ->
             when (event) {
@@ -37,8 +42,10 @@ class SplashFragment : BaseFragment() {
 
     override fun onDetach() {
         super.onDetach()
-        getAppActionBar()?.show()
+        setAppBarLayoutVisibility(VISIBLE)
     }
 
-    private fun getAppActionBar() = (activity as? AppCompatActivity)?.supportActionBar
+    private fun setAppBarLayoutVisibility(visibility: Int) {
+        requireActivity().findViewById<AppBarLayout>(R.id.appBar).visibility = visibility
+    }
 }

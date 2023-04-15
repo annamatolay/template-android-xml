@@ -5,14 +5,12 @@ import android.view.View
 import androidx.annotation.CallSuper
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
-import androidx.viewbinding.ViewBinding
 import dev.anmatolay.template.xml.core.NavigationEvent
 import timber.log.Timber
 
 abstract class BaseFragment : Fragment() {
 
     protected abstract val viewModel: BaseViewModel
-    protected lateinit var binding: ViewBinding
 
     @CallSuper
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
