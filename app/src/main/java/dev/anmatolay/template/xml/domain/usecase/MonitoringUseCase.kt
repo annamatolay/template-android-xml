@@ -31,4 +31,6 @@ class MonitoringUseCase(
                 CrashlyticsLogTree(crashlytics, userId)
         )
     }
+
+    fun isCrashlyticsCollectionEnabled(isEnabled: Boolean) = crashlytics.setCrashlyticsCollectionEnabled(isEnabled)
 }
