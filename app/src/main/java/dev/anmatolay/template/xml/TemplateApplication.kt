@@ -20,9 +20,9 @@ class TemplateApplication : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        monitoringUseCase.isCrashlyticsCollectionEnabled(!BuildConfig.DEBUG)
-
         KoinInitializer.init(this)
+
+        monitoringUseCase.isCrashlyticsCollectionEnabled(!BuildConfig.DEBUG)
 
         getUserUseCase()
             .doOnSuccess { user = it }
