@@ -32,10 +32,9 @@ class SplashFragment : BaseFragment() {
 
         setAppBarLayoutVisibility(INVISIBLE)
 
-        onNavigationEventReceived { event ->
-            when (event) {
-                SplashNavigationEvent.Home ->
-                    navigateTo(SplashFragmentDirections.actionToHomeFragment())
+        viewModel.uiState.observe { state ->
+            if (!state.isIdle) {
+                navigateTo(SplashFragmentDirections.actionToHomeFragment())
             }
         }
     }

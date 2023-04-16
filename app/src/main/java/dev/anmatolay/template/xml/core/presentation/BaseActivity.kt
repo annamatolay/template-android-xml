@@ -4,7 +4,6 @@ import android.os.Bundle
 import androidx.annotation.CallSuper
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.LiveData
-import dev.anmatolay.template.xml.core.NavigationEvent
 import timber.log.Timber
 
 abstract class BaseActivity : AppCompatActivity() {
@@ -37,12 +36,6 @@ abstract class BaseActivity : AppCompatActivity() {
         viewModel.onDestroyView()
         super.onDestroy()
         Timber.d("${this.javaClass.simpleName} - onDestroy")
-    }
-
-    protected fun onNavigationEventReceived(function: (NavigationEvent) -> Unit) {
-        viewModel.navigationEvents.observe(this) { event ->
-            function(event)
-        }
     }
 
     protected fun <T> LiveData<T>.observe(observer: (T) -> Unit) {

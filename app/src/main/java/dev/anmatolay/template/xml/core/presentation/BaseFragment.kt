@@ -5,12 +5,15 @@ import android.view.View
 import androidx.annotation.CallSuper
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
-import dev.anmatolay.template.xml.core.NavigationEvent
 import timber.log.Timber
 
 abstract class BaseFragment : Fragment() {
 
-    protected abstract val viewModel: BaseViewModel
+    protected abstract val viewModel: BaseUdfViewModel<out UiState, out UiEvent>
+
+    protected fun <T> LiveData<T>.observe(observer: (T) -> Unit) {
+        observe(viewLifecycleOwner, observer)
+    }
 
     @CallSuper
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -38,14 +41,5 @@ abstract class BaseFragment : Fragment() {
         viewModel.onDestroyView()
         super.onDestroyView()
         Timber.d("${this.javaClass.simpleName} - onDestroyView")
-    }
-
-    protected fun onNavigationEventReceived(function: (NavigationEvent) -> Unit) {
-        viewModel.navigationEvents.observe(viewLifecycleOwner) { event ->
-            function(event)
-        }
-    }
-    protected fun <T> LiveData<T>.observe(observer: (T) -> Unit) {
-        observe(viewLifecycleOwner, observer)
     }
 }
