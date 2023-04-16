@@ -8,7 +8,7 @@ import timber.log.Timber
 
 abstract class BaseActivity : AppCompatActivity() {
 
-    protected abstract val viewModel: BaseViewModel
+    protected abstract val viewModel: BaseUdfViewModel<out UiState, out UiEvent>
 
     @CallSuper
     override fun onCreate(savedInstanceState: Bundle?) {

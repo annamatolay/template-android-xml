@@ -46,8 +46,6 @@ Firebase (Only free to use)
 
 The current version has the following core view components to handle Rx disposable easier and make implementation easier.
 
-**BaseViewModel:** Easier Rx disposing and lifecycle logging
-
 **BaseUdfViewModel:** Force UDF, Rx disposing and lifecycle logging
 
 **BaseActivity:** Default `BaseViewModel`, lifecycle logging and LiveData support.
@@ -62,7 +60,7 @@ Targeted single activity approach.
 
 Following [Conventional Commits](https://cheatography.com/albelop/cheat-sheets/conventional-commits/)
 
-## Additional informations
+## Additional information
 
 Empty packages having .getkeep files
 
