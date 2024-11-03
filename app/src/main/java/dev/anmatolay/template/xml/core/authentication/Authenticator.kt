@@ -1,6 +1,6 @@
 package dev.anmatolay.template.xml.core.authentication
 
-import dev.anmatolay.template.xml.data.local.CacheUserIdUseCase
+import dev.anmatolay.template.xml.domain.usecase.CacheUserIdUseCase
 import dev.anmatolay.template.xml.domain.usecase.MonitoringUseCase
 import io.reactivex.rxjava3.core.Completable
 import org.koin.java.KoinJavaComponent.inject

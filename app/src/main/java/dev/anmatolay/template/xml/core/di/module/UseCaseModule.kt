@@ -1,7 +1,7 @@
 package dev.anmatolay.template.xml.core.di.module
 
-import dev.anmatolay.template.xml.data.local.CacheUserIdUseCase
-import dev.anmatolay.template.xml.data.local.GetUserUseCase
+import dev.anmatolay.template.xml.domain.usecase.CacheUserIdUseCase
+import dev.anmatolay.template.xml.domain.usecase.GetUserUseCase
 import dev.anmatolay.template.xml.domain.usecase.MonitoringUseCase
 import org.koin.dsl.module
 

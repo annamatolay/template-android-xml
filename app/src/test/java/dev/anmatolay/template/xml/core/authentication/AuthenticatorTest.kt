@@ -1,10 +1,9 @@
 package dev.anmatolay.template.xml.core.authentication
 
 import dev.anmatolay.template.xml.BaseTest
-import dev.anmatolay.template.xml.data.local.CacheUserIdUseCase
+import dev.anmatolay.template.xml.domain.usecase.CacheUserIdUseCase
 import dev.anmatolay.template.xml.domain.usecase.MonitoringUseCase
 import dev.anmatolay.template.xml.util.Constants.USER_DEFAULT_ID
-import dev.anmatolay.template.xml.util.TestConstants
 import dev.anmatolay.template.xml.util.TestConstants.TEST_USER_ID
 import io.mockk.*
 import io.reactivex.rxjava3.core.Completable

@@ -3,7 +3,7 @@ package dev.anmatolay.template.xml
 import android.app.Application
 import dev.anmatolay.template.xml.core.authentication.Authenticator
 import dev.anmatolay.template.xml.core.di.KoinInitializer
-import dev.anmatolay.template.xml.data.local.GetUserUseCase
+import dev.anmatolay.template.xml.domain.usecase.GetUserUseCase
 import dev.anmatolay.template.xml.domain.model.User
 import dev.anmatolay.template.xml.domain.usecase.MonitoringUseCase
 import org.koin.android.ext.android.inject

@@ -1,6 +1,5 @@
 package dev.anmatolay.template.xml.domain.usecase
 
-import dev.anmatolay.template.xml.data.local.GetUserUseCase
 import dev.anmatolay.template.xml.data.repository.UserCacheRepository
 import dev.anmatolay.template.xml.domain.model.User
 import dev.anmatolay.template.xml.util.Constants.USER_DEFAULT_ID
